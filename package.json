@@ -1,0 +1,16 @@
+{
+  "name": "board_vumer",
+  "version": "0.1",
+  "description": "Placar online de Jogos Esportivos",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Kalisom Cruz",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.0"
+  }
+}
