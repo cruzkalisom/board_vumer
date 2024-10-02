@@ -1,7 +1,5 @@
 const router = require('express').Router()
 
-router.get('/admin', (req, res) => {
-    res.render('admin')
-})
+router.get('')
 
 module.exports = router
