@@ -1,5 +1,10 @@
 const router = require('express').Router()
 const uploads = require('../modules/uploads')
+const db = require('../modules/db')
+
+router.post('/login', uploads.any(), (req, res) => {
+    console.log(req.body)
+})
 
 router.post('/register', uploads.any(), (req, res) => {
     console.log(req.body)
