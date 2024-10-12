@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Registration Page (v2)</title>
+  <title>Board Vumer | Entrar</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -13,36 +13,21 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
 
   <!-- Styles -->
-   <link rel="stylesheet" href="css/general/register.css">
+   <link rel="stylesheet" href="css/general/login.css">
 </head>
-<body class="hold-transition register-page">
-<div class="register-box">
-  <div class="card card-outline card-primary">
+<body class="hold-transition login-page">
+<div class="login-box">
+  <!-- /.login-logo -->
+  <div class="card card-outline card-purple">
     <div class="card-header text-center">
       <a href="/" class="h1"><b>Board</b>VUMER</a>
     </div>
     <div class="card-body">
-      <p class="login-box-msg">Registrar como Novo Membro</p>
+      <p class="login-box-msg">Faça login para iniciar sua sessão</p>
       <div id="alert"></div>
       <form action="" method="post">
         <div class="input-group mb-3">
-          <input id="name" type="text" class="form-control" placeholder="Nome">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
-            </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input id="surname" type="text" class="form-control" placeholder="Sobrenome">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
-            </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input id="email" type="email" class="form-control" placeholder="E-mail">
+          <input id="email" type="email" class="form-control" placeholder="E-mail" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -57,37 +42,35 @@
             </div>
           </div>
         </div>
-        <div class="input-group mb-3">
-          <input id="confirm-password" type="password" class="form-control" placeholder="Confirmar senha">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms" name="terms" value="agree">
-              <label for="agreeTerms">
-               Eu aceito os <a href="#">termos</a>
+              <input type="checkbox" id="remember">
+              <label for="remember">
+                Manter conectado
               </label>
             </div>
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button id="button-submit" type="button" class="btn btn-primary btn-block">Registrar</button>
+            <button id="button-submit" type="submit" class="btn btn-primary btn-block">Entrar</button>
           </div>
           <!-- /.col -->
         </div>
       </form>
 
-      <a href="/login" class="text-center">Já sou membro</a>
+      <p class="mb-1">
+        <a href="/forgot-password">Esqueci minha senha</a>
+      </p>
+      <p class="mb-0">
+        <a href="/register" class="text-center">Registrar</a>
+      </p>
     </div>
-    <!-- /.form-box -->
-  </div><!-- /.card -->
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
 </div>
-<!-- /.register-box -->
+<!-- /.login-box -->
 
 <!-- jQuery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -97,6 +80,6 @@
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 
 <!-- Functions -->
- <script src="js/general/register.js"></script>
+ <script src="js/general/login.js"></script>
 </body>
 </html>
