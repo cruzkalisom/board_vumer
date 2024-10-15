@@ -36,7 +36,7 @@ $('#button-submit').on('click', (event) => {
         auth = false
     }
 
-    if(!(/^[a-zA-Z0-9@#$%^&*\-_+={}[\]:;<>,.?~\\/()]+$/).test(email.value)){
+    if(!(/^[^\s@]+@[^\s@]+\.[^\s@]+$/).test(email.value)){
         email.classList.add('is-invalid')
         message = 'Digite um e-mail válido'
         auth = false
@@ -72,7 +72,14 @@ $('#button-submit').on('click', (event) => {
         contentType: false,
         processData: false,
         success: (data) => {
-            alerta(data.status)
+            if(data.utilEmail){
+                email.classList.add('is-invalid')
+                alerta('E-mail já cadastrado')
+            }
+
+            if(data.status){
+                location.href = data.oldpage
+            }
         },
         error: (err) => {
             console.error('Erro ao solicitar resposta na rota ' + url)

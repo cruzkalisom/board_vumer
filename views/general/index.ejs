@@ -41,8 +41,8 @@
                 </li>
               </ul>
               <div id="buttons-users">
-                <button type="button" class="general-buttons">Entrar</button>
-                <button type="button" class="general-buttons">Registrar</button>
+                <button type="button" id="button-login" class="general-buttons">Entrar</button>
+                <button type="button" id="button-register" class="general-buttons">Registrar</button>
               </div>
             </div>
           </div>
@@ -50,17 +50,38 @@
       </header>
       <main>
         <div class="row text-center" style="color: white; margin: 20px;">
-            <div class="col-md-6" style="margin: auto;">
-              <h1 style="font-family: Bebas Neue, sans-serif; font-size: 70px;">UM UPGRADE NO ESPORTE</h1>
-              
-              <button class="btn-scoreboard">
-                <span>Placar</span>
-              </button>
-            </div>
-            <div class="col-md-6">
-              <img src="images/general/logo_vumer.png" alt="Logo FiveVumer" class="img-fluid" style="opacity: 80%;">
+          <div class="col-md-6" style="margin: auto;">
+            <h1 style="font-family: Bebas Neue, sans-serif; font-size: 70px;">UM UPGRADE NO ESPORTE</h1>
+            
+            <button class="btn-scoreboard">
+              <span>Placar</span>
+            </button>
+          </div>
+          <div class="col-md-6">
+            <img src="images/general/logo_vumer.png" alt="Logo FiveVumer" class="img-fluid" style="opacity: 80%;">
+          </div>
+        </div>
+        <h4 class="text-center">Ferramentas</h4>
+        <br>
+        <div class="row">
+          <div class="col-md-4 col-tools">
+            <div class="card-tools-site">
+              Planos
             </div>
           </div>
+
+          <div class="col-md-4 col-tools">
+            <div class="card-tools-site">
+              Acessar Placar
+            </div>
+          </div>
+
+          <div class="col-md-4 col-tools">
+            <div class="card-tools-site">
+              Tutoriais
+            </div>
+          </div>
+        </div>
       </main>
       <footer>
         <div class="row">
@@ -78,6 +99,13 @@
             </div>
         </div>
     </footer>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- Jquery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- Functions -->
+   <script src="js/general/index.js"></script>
 </body>
 </html>

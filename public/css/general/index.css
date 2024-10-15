@@ -92,6 +92,7 @@ body {
   footer{
     background-color: #4b8cc9;
     padding: 12px;
+    margin-top: 12px;
 }
 
 footer a{
@@ -100,4 +101,38 @@ footer a{
 
 footer a:hover{
     color: #120B4A;
+}
+
+.card-tools-site {
+  margin: auto;
+  font-size: 20px;
+  box-sizing: border-box;
+  width: 190px;
+  height: 200px;
+  background: #8183FE;
+  border: 1px solid white;
+  box-shadow: 1px 1px 5px #8183FE;
+  border-radius: 17px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  font-weight: bolder;
+  color: white;
+}
+
+.card-tools-site:hover {
+  border: 1px solid black;
+  transform: scale(1.05);
+}
+
+.card-tools-site:active {
+  transform: scale(0.95) rotateZ(1.7deg);
+}
+
+.col-tools {
+  margin-bottom: 12px;
 }
