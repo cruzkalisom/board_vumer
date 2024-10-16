@@ -5,6 +5,7 @@ const BodyParser = require('body-parser')
 const session = require('express-session')
 
 const general = require('./routes/general')
+const admin = require('./routes/admin')
 
 var port = 50553 //80: Porta padrão HTTP | 443: Porta padrão HTTPS
 
@@ -27,6 +28,7 @@ app.set('view engine', 'ejs')
 app.use(express.static(__dirname+'/public'))
 
 app.use('/', general)
+app.use('/admin', admin)
 
 app.use((req, res) => {
     res.status(404).render('errors/404')

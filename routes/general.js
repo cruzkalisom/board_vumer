@@ -5,6 +5,7 @@ const encodes = require('../modules/encodes')
 
 router.post('/login', uploads.any(), (req, res) => {
     var sql = 'SELECT * FROM users WHERE email = ?'
+    var sql2 = 'INSERT INTO sessions (user_id) VALUES (?)'
 
     if((!req.body.email || req.body.email == undefined) || (!req.body.password || req.body.password == undefined)){
         return res.json({invalid: true})
@@ -23,7 +24,22 @@ router.post('/login', uploads.any(), (req, res) => {
             return res.json({invalidPassword: true})
         }
 
-        res.json({status: true})
+        var user_id = result[0].user_id
+
+        db.query(sql2, [user_id], (err, result) => {
+            if(err){
+                return console.log(err.message)
+            }
+
+            req.session.user_id = user_id
+            req.session.token = result.insertId
+
+            if(!req.session.oldpage || req.session.oldpage == undefined){
+                return res.json({status: true, oldpage: '/'})
+            }
+
+            res.json({status: true, oldpage: req.session.oldpage})
+        })
     })
 })
 
