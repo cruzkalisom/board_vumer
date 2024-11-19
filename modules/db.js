@@ -4,7 +4,7 @@ var connect = db.createConnection({
     host: 'localhost',
     user: 'root', 
     database: 'board_vumer',
-    password: 'VumerKalis003'
+    password: 'arthurr1500'
 })
 
 connect.connect((err) => {
