@@ -45,7 +45,21 @@ $("#button-submit").on('click', (event) => {
         contentType: false,
         processData: false,
         success: (data) => {
-            alerta(data.status)
+            if(data.invalid){
+                alerta('E-mail ou senha inválidos')
+            }
+
+            if(data.invalidEmail){
+                alerta('E-mail inválido')
+            }   
+
+            if(data.invalidPassword){
+                alerta('Senha inválida')
+            }
+            
+            if(data.status){
+                location.href = data.oldpage
+            }    
         },
         error: (err) => {
             console.error('Erro ao solicitar resposta na rota ' + url)
