@@ -3,6 +3,8 @@ const uploads = require('../modules/uploads')
 const db = require('../modules/db')
 const encodes = require('../modules/encodes')
 
+//Comments
+
 router.post('/', (req, res) =>{
     var sql = 'SELECT * FROM sessions WHERE token = ? AND user_id = ?'
     var sql2 = 'SELECT * FROM users WHERE user_id = ?'
