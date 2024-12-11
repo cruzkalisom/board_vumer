@@ -16,3 +16,7 @@ $.ajax({
         console.log(err)
     }
 })
+
+$('#new-game').on('click', (event) => {
+    event.preventDefault()
+})
