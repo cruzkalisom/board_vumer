@@ -152,4 +152,6 @@ router.get('/', (req, res) => {
     res.render('general/index')
 })
 
+
+
 module.exports = router

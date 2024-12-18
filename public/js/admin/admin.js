@@ -39,7 +39,18 @@ $('#create-game').on('click', () => {
         processData: false,
         contentType: false,
         success: (data) => {
-            console.log(data)
+            if(data.notlogin){
+                return alert('Faça o seu Login Para criar seu Jogo')
+            }
+
+            if(data.notlicense){
+                return alert('Adquira sua Licensa Para criar seu Jogo')
+            }
+
+            if(data.status){
+                alert('Jogo criado com sucesso')
+            }
+
         },
         error: (err) => {
             console.error('Erro ao solicitar resposta na rota ' + url)

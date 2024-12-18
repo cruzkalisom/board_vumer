@@ -1,5 +1,8 @@
 const router = require('express').Router()
 const db = require('../modules/db')
+const uploads = require('../modules/uploads')
+
+
 
 router.post('/', (req, res) => {
     var sql = 'SELECT * FROM sessions WHERE token = ? AND user_id = ?'
@@ -45,6 +48,42 @@ router.post('/', (req, res) => {
 router.get('/', (req, res) => {
     req.session.oldpage = '/admin'
     res.render('admin/index')
+})
+
+router.post('/create-game', uploads.any(), (req,res) =>{
+
+    var sql = 'SELECT * FROM sessions WHERE token = ? AND user_id = ?' 
+    var sql2 = 'SELECT * FROM licenses WHERE user_id = ?'
+    
+    if((!req.session.token || req.session.token == undefined) || (!req.session.user_id || req.session.user_id == undefined)){
+        return res.json({notlogin: true})
+    }
+
+    var token = req.session.token
+    var user_id = req.session.user_id
+
+    db.query(sql, [token, user_id], (err, result) => {
+        if(err){
+            return console.error(err.message)
+        }
+
+        if(!result[0]){
+            return res.json({notlogin: true})
+        }
+
+        db.query(sql2, [user_id], (err, result) => {
+            if(err){
+                return console.error(err.message)
+            }
+
+            if(!result[0]){
+                return res.json({notlicense: true})
+            }
+
+            res.json({status: true})
+        })
+    })
+
 })
 
 
