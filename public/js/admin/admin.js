@@ -25,7 +25,7 @@ $('#create-game').on('click', () => {
     var formData = new FormData()
     
     if(!(/[a-zA-Z]/).test(gameName.value)){
-        return alert('Digite um nome para o jogo')
+        return warning('Recusado','Digite um nome para o jogo')
     }
 
     formData.append('gameName', gameName.value)
@@ -40,15 +40,15 @@ $('#create-game').on('click', () => {
         contentType: false,
         success: (data) => {
             if(data.notlogin){
-                return alert('Faça o seu Login Para criar seu Jogo')
+                return warning('Recusado','Faça Login Para criar seu Jogo')
             }
 
             if(data.notlicense){
-                return alert('Adquira sua Licensa Para criar seu Jogo')
+                return danger('Negado','Adquira ou renove sua Licensa Para criar seu Jogo')
             }
 
             if(data.status){
-                alert('Jogo criado com sucesso')
+                success('Otimo','Jogo criado com sucesso')
             }
 
         },
@@ -66,5 +66,46 @@ $('#create-game').on('click', () => {
 $('#new-game').on('click', (event) => {
     event.preventDefault()
 })
+
+function danger(title,message){
+    document.getElementById ("toast").classList.remove("text-bg-success")
+    document.getElementById ("toast").classList.remove("text-bg-warning")
+
+    document.getElementById ("toast").classList.add("text-bg-danger")
+
+    document.getElementById("toast-title").innerText = title
+
+    document.getElementById("toast-body").innerText = message
+
+    bootstrap.Toast.getOrCreateInstance(toast).show()
+}
+
+function success(title,message){
+    document.getElementById ("toast").classList.remove("text-bg-danger")
+    document.getElementById ("toast").classList.remove("text-bg-warning")
+
+    document.getElementById ("toast").classList.add("text-bg-success")
+
+    document.getElementById("toast-title").innerText = title
+
+    document.getElementById("toast-body").innerText = message
+
+    bootstrap.Toast.getOrCreateInstance(toast).show()
+}
+
+function warning(title,message){
+    document.getElementById ("toast").classList.remove("text-bg-success")
+    document.getElementById ("toast").classList.remove("text-bg-danger")
+
+    document.getElementById ("toast").classList.add("text-bg-warning")
+
+    document.getElementById("toast-title").innerText = title
+
+    document.getElementById("toast-body").innerText = message
+
+    bootstrap.Toast.getOrCreateInstance(toast).show()
+}
+
+
 
 
