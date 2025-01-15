@@ -7,6 +7,7 @@ const uploads = require('../modules/uploads')
 router.post('/', (req, res) => {
     var sql = 'SELECT * FROM sessions WHERE token = ? AND user_id = ?'
     var sql2 = 'SELECT * FROM users WHERE user_id = ?'
+    var sql3 = 'SELECT * FROM games WHERE user_id = ?'
 
     if((!req.session.token || req.session.token == undefined) || (!req.session.user_id || req.session.user_id == undefined)){
         return res.json({notlogin: true})
@@ -35,12 +36,20 @@ router.post('/', (req, res) => {
 
             var name = `${result[0].name} ${result[0].surname}`
 
-            var dataToSend = {
-                status: true,
-                name: name,
-            }
+            db.query(sql3,[user_id], (err, result) => {
+                if(err){
+                    return console.error(err.message)
+                }
+                var games = result
 
-            res.json(dataToSend)
+                
+                var dataToSend = {
+                    status: true,
+                    name: name,
+                    games: games
+                }  
+                res.json(dataToSend)
+            })
         })
     })
 })

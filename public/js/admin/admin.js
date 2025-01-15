@@ -8,6 +8,7 @@ $.ajax({
             return location.href = '/login'
         }
         if(data.status){
+            loadgames(data.games)            
             document.getElementById('username').innerText = data.name
         }
     },
@@ -66,6 +67,28 @@ $('#create-game').on('click', () => {
 $('#new-game').on('click', (event) => {
     event.preventDefault()
 })
+
+function loadgames(games){
+    var html = ''
+    
+    games.forEach((game) =>{
+        html += `
+            <tr>
+                <th>${game.id}</th>
+                <td>${game.game_name}</td>
+                <td>${game.type}</td>
+                <td>${game.description}</td>
+                <td>
+                    <button class=" btn btn-sm btn-success">placar</button>
+                    <button class="btn btn-sm btn-warning"> controle</button>
+                </td>
+            </tr>
+        `
+    })
+    document.getElementById('table-body-games').innerHTML = html
+
+
+}
 
 function danger(title,message){
     document.getElementById ("toast").classList.remove("text-bg-success")
