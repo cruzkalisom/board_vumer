@@ -68,24 +68,37 @@ $('#new-game').on('click', (event) => {
     event.preventDefault()
 })
 
+function viewscoreboard(){
+    var buttons = document.querySelectorAll('[id^="buttons-scoreboard-view-"]')
+    buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+            var url = `/scoreboard/view/${button.dataset.id}`
+
+            window.open(url, '_blank')
+        })
+    })
+}
+
 function loadgames(games){
     var html = ''
     
-    games.forEach((game) =>{
+    games.forEach((game,i) =>{
         html += `
             <tr>
                 <th>${game.id}</th>
                 <td>${game.game_name}</td>
                 <td>${game.type}</td>
                 <td>${game.description}</td>
-                <td>
-                    <button class=" btn btn-sm btn-success">placar</button>
-                    <button class="btn btn-sm btn-warning"> controle</button>
+                <td class=" project-actions text-right">
+                    <button id="buttons-scoreboard-view-${i}" data-id="${game.id}" class=" btn btn-sm btn-success">placar</button>
+                    <button id="buttons-scoreboard-control-${i}" data-id="${game.id}" class="btn btn-sm btn-warning"> controle</button>
                 </td>
             </tr>
         `
     })
     document.getElementById('table-body-games').innerHTML = html
+
+    viewscoreboard()
 
 
 }
