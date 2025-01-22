@@ -7,6 +7,9 @@ const session = require('express-session')
 const general = require('./routes/general')
 const admin = require('./routes/admin')
 
+const scoreboard = require('./routes/scoreboard')
+
+
 var port = 50553 //80: Porta padrão HTTP | 443: Porta padrão HTTPS
 
 const app = express()
@@ -29,6 +32,7 @@ app.use(express.static(__dirname+'/public'))
 
 app.use('/', general)
 app.use('/admin', admin)
+app.use('/scoreboard', scoreboard )
 
 app.use((req, res) => {
     res.status(404).render('errors/404')

@@ -79,6 +79,18 @@ function viewscoreboard(){
     })
 }
 
+function controlscoreboard(){
+    var buttons = document.querySelectorAll('[id^="buttons-scoreboard-control-"]')
+    buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+            var url = `/scoreboard/control/${button.dataset.id}`
+
+            window.open(url, '_blank')
+        })
+    })
+}
+
+
 function loadgames(games){
     var html = ''
     
@@ -98,6 +110,7 @@ function loadgames(games){
     })
     document.getElementById('table-body-games').innerHTML = html
 
+    controlscoreboard()
     viewscoreboard()
 
 
