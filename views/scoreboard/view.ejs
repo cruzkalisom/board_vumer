@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board Vumer | Placar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/scoreboard/view.css">
+</head>
+<body>
+    <div class="scoreboard">
+        <div class="header">
+            Championship Math
+        </div>
+        <div class="timer-container">
+            <div class="timer" id="timer">12:00</div>
+            <!--<div class="timer-controls">
+                <button class="start" onclick="startTimer()">Start</button> 
+                <button class="pause" onclick="pauseTimer()">Pause</button>
+                <button class="reset" onclick="resetTimer()">Reset</button>
+            </div> -->
+        </div>
+        <div class="match-container">
+            <div class="team team1">
+                <div class="team-logo">
+                    <div style="font-size: 2rem;">🏆</div>
+                </div>
+                <div class="team-name">Team 1</div>
+                <div class="score" id="score1">0</div>
+                <!-- <div class="controls">
+                    <button onclick="updateScore(1, 1)">+1</button>
+                    <button onclick="updateScore(1, -1)">-1</button>
+                </div> -->
+            </div>
+            <div class="vs">VS</div>
+            <div class="team team2">
+                <div class="team-logo">
+                    <div style="font-size: 2rem;">🏆</div>
+                </div>
+                <div class="team-name">Team 2</div>
+                <div class="score" id="score2">0</div>
+               <!--  <div class="controls">
+                    <button onclick="updateScore(2, 1)">+1</button>
+                    <button onclick="updateScore(2, -1)">-1</button>
+                </div> -->
+            </div>
+        </div>
+        <div class="status" id="status">Jogo em andamento</div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/scoreboard/view.js"></script>  
+</body>
+</html>
