@@ -22,6 +22,7 @@ $('#create-game').on('click', () => {
     var gameType = document.getElementById('create-game-type')
     var gameName = document.getElementById('create-game-name')
     var gameDescription = document.getElementById('create-game-description')
+    var gamePrivate = document.getElementById('create-game-private')
     var url = '/admin/create-game'
     var formData = new FormData()
     
@@ -32,6 +33,7 @@ $('#create-game').on('click', () => {
     formData.append('gameName', gameName.value)
     formData.append('gameType', gameType.value)
     formData.append('gameDescription', gameDescription.value)
+    formData.append('gamePrivate', gamePrivate.checked)
 
     $.ajax({
         url: url,
@@ -49,6 +51,9 @@ $('#create-game').on('click', () => {
             }
 
             if(data.status){
+                gameName.value = null
+                gameDescription.value = null
+                gamePrivate.checked = false
                 success('Otimo','Jogo criado com sucesso')
             }
 

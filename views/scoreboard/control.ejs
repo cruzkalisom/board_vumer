@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Championship Scoreboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .scoreboard {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 800px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: #1a1a1a;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .timer-container {
+            text-align: center;
+            padding: 1rem;
+            background: #f8f8f8;
+        }
+
+        .timer {
+            font-size: 2.5rem;
+            font-weight: bold;
+            font-family: monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .match-container {
+            display: flex;
+            padding: 2rem;
+            gap: 2rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .team {
+            flex: 1;
+            text-align: center;
+        }
+
+        .team-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1rem;
+            background: #f8f8f8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .team-name {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .score {
+            font-size: 3rem;
+            font-weight: bold;
+            padding: 0.5rem;
+            border-radius: 8px;
+            background: #f8f8f8;
+            margin: 0.5rem 0;
+        }
+
+        .vs {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #666;
+        }
+
+        .controls {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        button.start { background: #28a745; }
+        button.start:hover { background: #218838; }
+        button.pause { background: #dc3545; }
+        button.pause:hover { background: #c82333; }
+        button.reset { background: #6c757d; }
+        button.reset:hover { background: #5a6268; }
+
+        .team1 .score { color: #2c5234; }
+        .team2 .score { color: #6f263d; }
+
+        .status {
+            text-align: center;
+            padding: 1rem;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="scoreboard">
+        <div class="header">
+            Championship Match
+        </div>
+        <div class="timer-container">
+            <div class="timer" id="timer">12:00</div>
+            <div class="timer-controls">
+                <button class="start" onclick="startTimer()">Start</button>
+                <button class="pause" onclick="pauseTimer()">Pause</button>
+                <button class="reset" onclick="resetTimer()">Reset</button>
+            </div>
+        </div>
+        <div class="match-container">
+            <div class="team team1">
+                <div class="team-logo">
+                    <div style="font-size: 2rem;">🏆</div>
+                </div>
+                <div class="team-name">Team 1</div>
+                <div class="score" id="score1">0</div>
+                <div class="controls">
+                    <button onclick="updateScore(1, 1)">+1</button>
+                    <button onclick="updateScore(1, -1)">-1</button>
+                </div>
+            </div>
+            <div class="vs">VS</div>
+            <div class="team team2">
+                <div class="team-logo">
+                    <div style="font-size: 2rem;">🏆</div>
+                </div>
+                <div class="team-name">Team 2</div>
+                <div class="score" id="score2">0</div>
+                <div class="controls">
+                    <button onclick="updateScore(2, 1)">+1</button>
+                    <button onclick="updateScore(2, -1)">-1</button>
+                </div>
+            </div>
+        </div>
+        <div class="status" id="status">Game in Progress</div>
+    </div>
+
+    <script>
+        let scores = {
+            team1: 0,
+            team2: 0
+        };
+
+        // Timer variables
+        let timeLeft = 12 * 60; // 12 minutes in seconds
+        let timerId = null;
+        let isRunning = false;
+
+        function updateScore(team, points) {
+            const teamKey = `team${team}`;
+            scores[teamKey] += points;
+            
+            // Prevent negative scores
+            if (scores[teamKey] < 0) scores[teamKey] = 0;
+            
+            document.getElementById(`score${team}`).textContent = scores[teamKey];
+            updateStatus();
+        }
+
+        function updateStatus() {
+            const statusElement = document.getElementById('status');
+            const scoreDiff = Math.abs(scores.team1 - scores.team2);
+            
+            if (scoreDiff > 20) {
+                statusElement.textContent = 'Blowout Game!';
+            } else if (scoreDiff > 10) {
+                statusElement.textContent = 'Comfortable Lead';
+            } else if (scoreDiff > 5) {
+                statusElement.textContent = 'Close Game';
+            } else if (scoreDiff > 0) {
+                statusElement.textContent = 'Very Close Game!';
+            } else {
+                statusElement.textContent = 'Tied Game!';
+            }
+        }
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function updateTimer() {
+            if (timeLeft > 0) {
+                timeLeft--;
+                document.getElementById('timer').textContent = formatTime(timeLeft);
+            } else {
+                pauseTimer();
+                document.getElementById('status').textContent = 'Game Over!';
+            }
+        }
+
+        function startTimer() {
+            if (!isRunning && timeLeft > 0) {
+                isRunning = true;
+                timerId = setInterval(updateTimer, 1000);
+            }
+        }
+
+        function pauseTimer() {
+            isRunning = false;
+            clearInterval(timerId);
+        }
+
+        function resetTimer() {
+            pauseTimer();
+            timeLeft = 12 * 60;
+            document.getElementById('timer').textContent = formatTime(timeLeft);
+            document.getElementById('status').textContent = 'Game in Progress';
+        }
+    </script>
+</body>
+</html>

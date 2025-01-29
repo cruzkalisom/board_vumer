@@ -13,7 +13,6 @@ router.get('/control/:id', (req,res) => {
 }) 
 
 router.post('/view', (req, res) =>{
-    console.log(req.session.gameid)
     res.json({status: true})
 })
 

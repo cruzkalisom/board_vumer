@@ -1,5 +1,7 @@
 var urlviewscoreboard = '/scoreboard/view'
 
+const socket = io()
+
 $.ajax ({
     url : urlviewscoreboard,
     type : 'post',
