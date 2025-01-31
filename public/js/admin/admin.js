@@ -18,6 +18,22 @@ $.ajax({
     }
 })
 
+$('#control-org').on('click', (event) =>{
+    event.preventDefault()
+    var url = '/orgs'
+    $.ajax({
+        url: url,
+        type : 'POST',
+        success : (data) => {
+            alert(data.status)
+        },        
+        error : (err) => {
+            console.error('Erro ao solicitar resposta na rota ' + url)   
+            console.error(err)         
+        }
+    })
+})
+
 $('#create-game').on('click', () => {
     var gameType = document.getElementById('create-game-type')
     var gameName = document.getElementById('create-game-name')

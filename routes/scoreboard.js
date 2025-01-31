@@ -10,6 +10,7 @@ router.get('/view/:id', (req,res) => {
 
 router.get('/control/:id', (req,res) => {
     res.json({status: true})
+    
 }) 
 
 router.post('/view', (req, res) =>{
