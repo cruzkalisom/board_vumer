@@ -6,7 +6,7 @@ $.ajax ({
     url : urlviewscoreboard,
     type : 'post',
     success : (data) =>{
-        alert(data.status)
+        
     },
     error : (err)=>{
         console.err('erro ao solicitar resposta na rota ' +url)
@@ -15,7 +15,10 @@ $.ajax ({
       
 })
 
-
+socket.on('updatetimer',(data) => {       // .on ouvir eventos
+    console.log(data)
+    document.getElementById ('timer').innerText = data
+})
 
 
 

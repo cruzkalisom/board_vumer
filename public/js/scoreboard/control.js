@@ -1,4 +1,7 @@
 var urlcontrolscoreboard = '/scoreboard/control'
+var timer = 90 * 60; // 90 minutes in seconds
+var isRunning = true
+var timerId = null
 
 const socket = io()
 
@@ -6,7 +9,7 @@ $.ajax ({
     url : urlcontrolscoreboard,
     type : 'post',
     success : (data) =>{
-        alert(data.status)
+       
     },
     error : (err)=>{
         console.err('erro ao solicitar resposta na rota ' +url)
@@ -15,7 +18,20 @@ $.ajax ({
       
 })
 
+function startTimer(){
+    if (isRunning){
+        timerId = setInterval(() => {
+            timer -= 1
+            document.getElementById('timer').innerHTML = timer
+            socket.emit('updatetimer',timer)
+        },1000)
 
+
+    }
+
+}
+
+startTimer() // iniciar o timer
 
 /* let scores = {
     team1: 0,
