@@ -6,6 +6,7 @@ router.post('/', (req , res) => {
     var sql2 = 'SELECT * FROM licenses WHERE user_id = ?'    
     var slq3 = 'SELECT * FROM organizations WHERE owner_id = ?'
 
+
     if((!req.session.token || req.session.token == undefined) || (!req.session.user_id || req.session.user_id == undefined)){
         return res.json ({ notlogin: true})
     } 
@@ -38,10 +39,21 @@ router.post('/', (req , res) => {
 
                 if(!result[0]){
                     return res.json({noorganizations: true})
+                }   
+                
+                var organizations = result
+                
+                var dataToSend = {
+                    status: true,
+                    organizations: organizations
                 }
+
+                res.json(dataToSend)
             })
         })
     })
 })
+
+
 
 module.exports = router

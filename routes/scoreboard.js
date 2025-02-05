@@ -9,14 +9,17 @@ router.get('/view/:id', (req,res) => {
 }) 
 
 router.get('/control/:id', (req,res) => {
-    res.json({status: true})
-    
+    req.session.gameid = req.params.id
+    res.render('scoreboard/control')
 }) 
 
 router.post('/view', (req, res) =>{
     res.json({status: true})
 })
 
+router.post('/control', (req, res) =>{
+    res.json({status: true})
+})
 
 module.exports = router
 

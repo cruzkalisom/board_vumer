@@ -25,8 +25,24 @@ $('#control-org').on('click', (event) =>{
         url: url,
         type : 'POST',
         success : (data) => {
-            alert(data.status)
+            if (data.notlogin){
+                return warning('Cancelado','Você precisa estar logado para acessar essa página')
+            }
+
+            if (data.invalidlicense){
+                return danger('Negado','Você precisa ter uma licença para acessar essa página')
+            }
+
+            if(data.noorganizations){
+                return warning('Cancelado','Você não está em nenhuma organização')
+            }
+
+            if(data.status){
+                console.log(data.noorganizations)
+            }
+
         },        
+        
         error : (err) => {
             console.error('Erro ao solicitar resposta na rota ' + url)   
             console.error(err)         

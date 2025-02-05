@@ -1,9 +1,9 @@
-var urlviewscoreboard = '/scoreboard/view'
+var urlcontrolscoreboard = '/scoreboard/control'
 
 const socket = io()
 
 $.ajax ({
-    url : urlviewscoreboard,
+    url : urlcontrolscoreboard,
     type : 'post',
     success : (data) =>{
         alert(data.status)
@@ -14,9 +14,6 @@ $.ajax ({
     }
       
 })
-
-
-
 
 
 
