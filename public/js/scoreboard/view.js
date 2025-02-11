@@ -17,10 +17,22 @@ $.ajax ({
 
 socket.on('updatetimer',(data) => {       // .on ouvir eventos
     console.log(data)
-    document.getElementById ('timer').innerText = data
+    document.getElementById ('timer').innerText = formatTime(data)
 })
 
+function formatTime(timer){ 
+    if (timer < 60){
+        return `00:${String(timer).padStart(2, '0')}`
+    }
 
+    const hours = Math.floor(timer / 3600)
+    
+    const minutes = Math.floor((timer % 3600) / 60)
+
+    const seconds = timer % 60
+
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+}
 
 
 /* let scores = {
