@@ -82,6 +82,10 @@ $('#create-game').on('click', () => {
                 return danger('Negado','Adquira ou renove sua Licensa Para criar seu Jogo')
             }
 
+            if(data.notorg){
+                return warning('Recusado', 'Você não está em nenhuma organização')
+            }
+
             if(data.status){
                 gameName.value = null
                 gameDescription.value = null
@@ -104,6 +108,11 @@ $('#create-game').on('click', () => {
 $('#new-game').on('click', (event) => {
     event.preventDefault()
 })
+
+$('#new-organization').on('click', (event) => {
+    event.preventDefault()
+})
+
 
 function viewscoreboard(){
     var buttons = document.querySelectorAll('[id^="buttons-scoreboard-view-"]')

@@ -63,7 +63,9 @@ router.post('/create-game', uploads.any(), (req,res) =>{
 
     var sql = 'SELECT * FROM sessions WHERE token = ? AND user_id = ?' 
     var sql2 = 'SELECT * FROM licenses WHERE user_id = ?'
-    var sql3 = 'INSERT INTO games (user_id, game_name, type, description, game_private) VALUES (?, ?, ?, ?, ?)'
+    var sql3 = 'INSERT INTO games (user_id, game_name, type, description, game_private, game_org) VALUES (?, ?, ?, ?, ?,?)'
+    var sql4 = 'SELECT * FROM users_org WHERE user_id = ?'
+
     
     if((!req.session.token || req.session.token == undefined) || (!req.session.user_id || req.session.user_id == undefined)){
         return res.json({notlogin: true})
@@ -95,20 +97,34 @@ router.post('/create-game', uploads.any(), (req,res) =>{
                 gamePrivate = 'Y'
             }
 
-            var database = [
-                user_id,
-                req.body.gameName,
-                req.body.gameType,
-                req.body.gameDescription,
-                gamePrivate
 
-            ]
-            db.query(sql3, database,(err) => {
-                if(err){
+            db.query(sql4, [user_id], (err, result) => {
+                if (err){
                     return console.error(err.message)
                 }
-                res.json({status: true})
-            }) 
+                if(!result[0]){
+                    return res.json({notorg: true})
+                }
+
+                var database = [
+                    user_id,
+                    req.body.gameName,
+                    req.body.gameType,
+                    req.body.gameDescription,
+                    gamePrivate,
+                    result[0].org_id
+
+    
+                ] 
+
+                db.query(sql3, database,(err) => {
+                    if(err){
+                        return console.error(err.message)
+                    }
+                    res.json({status: true})
+                }) 
+            })
+ 
         })
     })
 
