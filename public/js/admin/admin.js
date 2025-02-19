@@ -113,7 +113,49 @@ $('#new-organization').on('click', (event) => {
     event.preventDefault()
 })
 
+$('#create-org').on('click', () =>{
+    var orgName = document.getElementById('create-org-name')
+    var logOrg = $('#org-logo')[0].files[0]
+    var valid = true
+    var url = '/admin/create-org'
+    var formData = new FormData()
 
+
+    orgName.classList.remove('is-invalid')
+
+    if(!(/[a-zA-Z]/).test(orgName.value)){
+        valid = false
+        orgName.classList.add('is-invalid')
+    }
+
+    if(!valid){
+        return danger('Negado','Nome da Organização inválido')
+    }
+
+    formData.append('orgName', orgName.value)
+    formData.append('orgLogo', logOrg)
+
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: (data) =>{
+            if(data.notlogin){
+                orgName.value = null
+                document.getElementById('org-logo').value = null
+                return warning('Recusado','Você não está logado ou sua sessão expirou. Por favor, atualize novamente')
+            }
+        },
+        error: (err) =>{
+            console.error('Erro ao solicitar resposta na rota ' + url)
+            console.error(err)
+        }
+
+    })
+
+})
 function viewscoreboard(){
     var buttons = document.querySelectorAll('[id^="buttons-scoreboard-view-"]')
     buttons.forEach((button) => {

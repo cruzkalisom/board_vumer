@@ -130,6 +130,15 @@ router.post('/create-game', uploads.any(), (req,res) =>{
 
 })
 
+router.post('/create-org',uploads.any(), (req,res) =>{
+    var sql = 'SELECT * FROM sessions WHERE token = ? AND user_id = ?'
+    var sql2 = 'SELECT * FROM licenses WHERE user_id = ?'
+
+    if((!req.session.token || req.session.token == undefined) || (!req.session.user_id || req.session.user_id ==  undefined)){
+        return res.json({notlogin: true})
+    }
+
+})
 
 module.exports = router
 
