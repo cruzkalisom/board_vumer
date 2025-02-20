@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const db = require('../modules/db')
 const uploads = require('../modules/uploads')
+const moment = require('moment')
 
 
 
@@ -133,11 +134,46 @@ router.post('/create-game', uploads.any(), (req,res) =>{
 router.post('/create-org',uploads.any(), (req,res) =>{
     var sql = 'SELECT * FROM sessions WHERE token = ? AND user_id = ?'
     var sql2 = 'SELECT * FROM licenses WHERE user_id = ?'
+    
 
     if((!req.session.token || req.session.token == undefined) || (!req.session.user_id || req.session.user_id ==  undefined)){
         return res.json({notlogin: true})
     }
 
+    var user_id = req.session.user_id 
+    var token = req.session.token
+
+    db.query(sql, [token, user_id], (err, result) => {
+        if(err){
+            return console.error(err.message)
+        }
+
+        if(!result[0]){
+            return res.json({notlogin: true})
+        }
+
+        db.query(sql2, [user_id], (err, result) => {
+            if(err){
+                return console.error(err.message)
+            }
+
+            if(!result[0]){
+                return res.json({notlicense: true})
+            }
+
+            var atualDate = moment()
+            var expireDate = moment(result[0].validate)
+            var diffDate =  atualDate.diff(expireDate,'days')
+
+
+            if(diffDate > 5 ) { // 5( numero de dias que o cliente pode acessar após expirar sua licensa )
+                return res.json({expiredlicense: true, daysleft: diffDate})
+            }
+
+            
+        })
+    })
+    
 })
 
 module.exports = router

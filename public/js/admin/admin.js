@@ -147,6 +147,19 @@ $('#create-org').on('click', () =>{
                 document.getElementById('org-logo').value = null
                 return warning('Recusado','Você não está logado ou sua sessão expirou. Por favor, atualize novamente')
             }
+
+            if(data.notlicense){
+                orgName.value = null
+                document.getElementById('org-logo').value = null
+                return danger('Recusado','Você precisa ter uma licença para criar uma organização')
+            }
+
+            if(data.expiredlicense){
+                orgName.value = null
+                document.getElementById('org-logo').value = null
+                return danger('Recusado',`Sua licença expirou à ${data.daysleft} dias. Por favor, atualize novamente`)
+            }
+
         },
         error: (err) =>{
             console.error('Erro ao solicitar resposta na rota ' + url)
