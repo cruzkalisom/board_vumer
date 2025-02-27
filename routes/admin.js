@@ -2,6 +2,8 @@ const router = require('express').Router()
 const db = require('../modules/db')
 const uploads = require('../modules/uploads')
 const moment = require('moment')
+const path = require('path')
+const fs = require('fs/promises')
 
 
 
@@ -124,6 +126,8 @@ router.post('/create-game', uploads.any(), (req,res) =>{
                     }
                     res.json({status: true})
                 }) 
+
+
             })
  
         })
@@ -131,10 +135,12 @@ router.post('/create-game', uploads.any(), (req,res) =>{
 
 })
 
-router.post('/create-org',uploads.any(), (req,res) =>{
+router.post('/create-org',uploads.single('orgLogo'), (req,res) =>{
     var sql = 'SELECT * FROM sessions WHERE token = ? AND user_id = ?'
     var sql2 = 'SELECT * FROM licenses WHERE user_id = ?'
-    
+    var sql3 = 'SELECT * FROM users WHERE user_id = ?'
+    var sql4 =  'INSERT INTO organizations (org_name, owner_id, owner_name) VALUES (?,?,?)'
+   
 
     if((!req.session.token || req.session.token == undefined) || (!req.session.user_id || req.session.user_id ==  undefined)){
         return res.json({notlogin: true})
@@ -170,6 +176,42 @@ router.post('/create-org',uploads.any(), (req,res) =>{
                 return res.json({expiredlicense: true, daysleft: diffDate})
             }
 
+            db.query(sql3,[user_id], (err, result) => {
+                if(err){
+                    return console.error(err.message)
+                }
+
+                if(!result[0]){
+                    return res.json({notlogin: true})
+                }
+
+                var name = `${result[0].name} ${result[0].surname}`
+                var database = [
+                    req.body.orgName , 
+                    user_id ,
+                    name 
+                ]
+
+                db.query(sql4, database, (err, result) => {
+                    if(err){
+                        return console.error(err.message)
+                    }     
+                    
+                    if(req.file){
+                        var nameOld = req.file.filename
+                        var arqOld = path.join('uploads', nameOld)
+                        var newName = `logo_${result.insertId}.png`
+                        var newArq = path.join('uploads', newName)
+                        fs.rename(arqOld, newArq)
+                    }
+
+                    res.json({status: true})
+
+
+                })
+
+
+            })
             
         })
     })

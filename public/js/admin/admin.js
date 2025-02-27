@@ -154,12 +154,18 @@ $('#create-org').on('click', () =>{
                 return danger('Recusado','Você precisa ter uma licença para criar uma organização')
             }
 
+
             if(data.expiredlicense){
                 orgName.value = null
                 document.getElementById('org-logo').value = null
                 return danger('Recusado',`Sua licença expirou à ${data.daysleft} dias. Por favor, atualize novamente`)
             }
 
+            if(data.status){
+                orgName.value = null
+                document.getElementById('org-logo').value = null
+                success('Sucesso','Organização criada com sucesso')
+            }
         },
         error: (err) =>{
             console.error('Erro ao solicitar resposta na rota ' + url)
