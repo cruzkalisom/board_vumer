@@ -174,14 +174,14 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>9999</h3>
+                <h3>9999 dias</h3>
 
-                <a href="#" style="color: white;">Configuração</a>
+                <a href="#" style="color: white;">Assinatura</a>
               </div>
               <div class="icon">
                 <i class="fa-solid fa-gear"></i>
               </div>
-              <a href="#" class="small-box-footer">Mais informações <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="#" class="small-box-footer">MAIS INFORMAÇÃO <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -304,23 +304,41 @@
       <div  class="modal-dialog modal-lg" >
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5">Novo Jogo</h1>
+            <h1 class="modal-title fs-5">Novo jogo</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <div class="row">
               <div class="col-md-6">
-                <label class="form-label" for="create-game-name">Nome Do jogo:</label>
+                <label class="form-label" for="create-game-name">Nome do jogo:</label>
                 <input class="form-control" placeholder="Nome Do Jogo" type="text" name="create-game-name" id="create-game-name">
-                <label class="form-label" for="create-game-description">Descrição Do Jogo:</label>
+                <label class="form-label" for="create-game-description">Descrição do Jogo:</label>
                 <textarea class="form-control" placeholder="Descrição Do Jogo" name="create-game-description" id="create-game-description"></textarea>
               </div>
               <div class="col-md-6">
-                <label class="form-label" for="create-game-type">Tipo De Jogo:</label>
+                <label class="form-label" for="create-game-type">Tipo de jogo:</label>
                 <select class="form-select" name="create-game-type" id="create-game-type">
-                  <option value="Futebol">Futebol</option>
+                  <option selected value="Futebol">Futebol</option>
                   <option value="Basquete">Basquete</option>
+                  <option value="Vôlei">Vôlei</option>
                 </select>
+                <br>
+                <div id="config-time-game" class="row">
+                  <div  class="col-md-6">
+                    <label class="form-label" for="time-game">Tempos do jogo:</label>
+                    <select class="form-select" name="time-game" id="time-game">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="minutes-game">Minutos por tempo:</label>
+                    <input class="form-control" type="number" name="minutes-game" id="minutes-game">
+                  </div>
+                </div>
                 <br>
                 <div class="form-check form-switch" style="margin-left: 22px;">
                   <input class="form-check-input" type="checkbox" name="create-game-private" id="create-game-private">

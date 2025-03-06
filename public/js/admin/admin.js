@@ -109,6 +109,17 @@ $('#new-game').on('click', (event) => {
     event.preventDefault()
 })
 
+$('#create-game-type').on('click', () => {
+    var value = document.getElementById('create-game-type').value
+
+    if(value != 'Vôlei'){
+        document.getElementById('config-time-game').hidden = false
+    } else{
+        document.getElementById('config-time-game').hidden = true
+    }
+
+})
+
 $('#new-organization').on('click', (event) => {
     event.preventDefault()
 })
