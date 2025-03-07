@@ -62,6 +62,39 @@ router.get('/', (req, res) => {
     res.render('admin/index')
 })
 
+router.post('/user-orgs', (req, res) => {
+
+    var sql = 'SELECT * FROM sessions WHERE token = ? AND user_id = ?'
+    var sql2 = 'SELECT * FROM users_org WHERE user_id = ?'
+
+    if((!req.session.token || req.session.token == undefined) || (!req.session.user_id || req.session.user_id == undefined)){
+        return res.json({notlogin: true})
+    }  
+    var user_id = req.session.user_id
+    var token = req.session.token
+
+    db.query(sql, [token, user_id], (err,result) => {
+        if(err){
+            return console.error(err.message)
+        }
+
+        if(!result[0]){
+            return res.json({notlogin: true})
+        }
+
+        db.query(sql2, [user_id], (err, result) => {
+            if(err){
+                return console.error(err.message)
+            }
+            
+            console.log(result)
+            res.json({status: true})
+        })
+
+    })
+
+})
+
 router.post('/create-game', uploads.any(), (req,res) =>{
 
     var sql = 'SELECT * FROM sessions WHERE token = ? AND user_id = ?' 
@@ -140,6 +173,7 @@ router.post('/create-org',uploads.single('orgLogo'), (req,res) =>{
     var sql2 = 'SELECT * FROM licenses WHERE user_id = ?'
     var sql3 = 'SELECT * FROM users WHERE user_id = ?'
     var sql4 =  'INSERT INTO organizations (org_name, owner_id, owner_name) VALUES (?,?,?)'
+    var sql5 = 'INSERT INTO users_org (name, user_id, org_id) VALUES (?,?,?)'
    
 
     if((!req.session.token || req.session.token == undefined) || (!req.session.user_id || req.session.user_id ==  undefined)){
@@ -205,8 +239,19 @@ router.post('/create-org',uploads.single('orgLogo'), (req,res) =>{
                         fs.rename(arqOld, newArq)
                     }
 
-                    res.json({status: true})
+                    var database = [
+                        name,
+                        user_id,
+                        result.insertId
+                    ]
 
+                    db.query(sql5, database, (err) => {
+                        if(err){
+                            return console.error(err.message)
+                        }
+
+                        res.json({status: true})
+                    })
 
                 })
 

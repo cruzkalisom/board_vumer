@@ -55,6 +55,8 @@ $('#create-game').on('click', () => {
     var gameName = document.getElementById('create-game-name')
     var gameDescription = document.getElementById('create-game-description')
     var gamePrivate = document.getElementById('create-game-private')
+    var gameTime = document.getElementById('time-game')
+    var gameMinutes = document.getElementById('minutes-game')
     var url = '/admin/create-game'
     var formData = new FormData()
     
@@ -66,6 +68,8 @@ $('#create-game').on('click', () => {
     formData.append('gameType', gameType.value)
     formData.append('gameDescription', gameDescription.value)
     formData.append('gamePrivate', gamePrivate.checked)
+    formData.append('gameTime', gameTime.value )
+    formData.append('minutes', gameMinutes.value)
 
     $.ajax({
         url: url,
@@ -107,6 +111,23 @@ $('#create-game').on('click', () => {
 
 $('#new-game').on('click', (event) => {
     event.preventDefault()
+
+    var url = '/admin/user-orgs'
+
+    $.ajax({
+        url: url,
+        method: 'POST',
+        success: (data) => {
+            if(data.status){
+                alert('Você está em uma organização')
+            }
+        },
+
+        error: (err) => {
+            console.error('Erro ao solicitar resposta na rota ' + url)
+            console.error(err)
+        }
+    })
 })
 
 $('#create-game-type').on('click', () => {
