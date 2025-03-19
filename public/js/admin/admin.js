@@ -59,9 +59,18 @@ $('#create-game').on('click', () => {
     var gameMinutes = document.getElementById('minutes-game')
     var url = '/admin/create-game'
     var formData = new FormData()
+
+    gameName.classList.remove('is-invalid')
+    gameMinutes.classList.remove('is-invalid')
     
     if(!(/[a-zA-Z]/).test(gameName.value)){
+        gameName.classList.add('is-invalid')
         return warning('Recusado','Digite um nome para o jogo')
+    }
+
+    if((!gameMinutes.value)||(isNaN(gameMinutes.value))) {
+        gameMinutes.classList.add('is-invalid')
+        return warning('Recusado','Digite os minutos dos tempos')
     }
 
     formData.append('gameName', gameName.value)
