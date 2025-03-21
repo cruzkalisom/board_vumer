@@ -87,8 +87,13 @@ router.post('/user-orgs', (req, res) => {
                 return console.error(err.message)
             }
             
-            console.log(result)
-            res.json({status: true})
+            var organizations = result
+            var dataToSend = {
+                status: true,
+                organizations: organizations
+            }
+
+            res.json(dataToSend)
         })
 
     })
@@ -178,7 +183,7 @@ router.post('/create-org',uploads.single('orgLogo'), (req,res) =>{
     var sql2 = 'SELECT * FROM licenses WHERE user_id = ?'
     var sql3 = 'SELECT * FROM users WHERE user_id = ?'
     var sql4 =  'INSERT INTO organizations (org_name, owner_id, owner_name) VALUES (?,?,?)'
-    var sql5 = 'INSERT INTO users_org (name, user_id, org_id) VALUES (?,?,?)'
+    var sql5 = 'INSERT INTO users_org (name, user_id, org_id, org_name) VALUES (?,?,?,?)'
    
 
     if((!req.session.token || req.session.token == undefined) || (!req.session.user_id || req.session.user_id ==  undefined)){
@@ -247,7 +252,8 @@ router.post('/create-org',uploads.single('orgLogo'), (req,res) =>{
                     var database = [
                         name,
                         user_id,
-                        result.insertId
+                        result.insertId,
+                        req.body.orgName
                     ]
 
                     db.query(sql5, database, (err) => {

@@ -128,7 +128,8 @@ $('#new-game').on('click', (event) => {
         method: 'POST',
         success: (data) => {
             if(data.status){
-                alert('Você está em uma organização')
+                orgsForGames(data.organizations)
+                
             }
         },
 
@@ -138,6 +139,7 @@ $('#new-game').on('click', (event) => {
         }
     })
 })
+
 
 $('#create-game-type').on('click', () => {
     var value = document.getElementById('create-game-type').value
@@ -303,6 +305,18 @@ function warning(title,message){
     bootstrap.Toast.getOrCreateInstance(toast).show()
 }
 
+function orgsForGames (organizations){
+    var html = ''
+    organizations.forEach( (organization) => {
+        html += `
+            <option value='${organization.org_id}'>${organization.org_name}</option>
+        `
+    })
+
+    console.log(html)
+
+    document.getElementById('game-select-org').innerHTML = html
+}
 
 
 
