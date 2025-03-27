@@ -57,6 +57,7 @@ $('#create-game').on('click', () => {
     var gamePrivate = document.getElementById('create-game-private')
     var gameTime = document.getElementById('time-game')
     var gameMinutes = document.getElementById('minutes-game')
+    var gameOrg = document.getElementById('game-select-org')
     var url = '/admin/create-game'
     var formData = new FormData()
 
@@ -79,6 +80,7 @@ $('#create-game').on('click', () => {
     formData.append('gamePrivate', gamePrivate.checked)
     formData.append('gameTime', gameTime.value )
     formData.append('minutes', gameMinutes.value)
+    formData.append('gameOrg', gameOrg.value)
 
     $.ajax({
         url: url,
@@ -102,6 +104,8 @@ $('#create-game').on('click', () => {
             if(data.status){
                 gameName.value = null
                 gameDescription.value = null
+                gameMinutes.value = null
+                gameTime.value = 1
                 gamePrivate.checked = false
                 success('Otimo','Jogo criado com sucesso')
             }
@@ -252,8 +256,9 @@ function loadgames(games){
                 <td>${game.type}</td>
                 <td>${game.description}</td>
                 <td class=" project-actions text-right">
-                    <button id="buttons-scoreboard-view-${i}" data-id="${game.id}" class=" btn btn-sm btn-success">placar</button>
-                    <button id="buttons-scoreboard-control-${i}" data-id="${game.id}" class="btn btn-sm btn-warning"> controle</button>
+                    <button id="buttons-scoreboard-view-${i}" data-id="${game.id}" class=" btn btn-sm btn-success" title="Placar"><i class="fa-solid fa-plus-minus"></i></button>
+                    <button id="buttons-scoreboard-control-${i}" data-id="${game.id}" class="btn btn-sm btn-warning" title="Controle"><i class="fa-solid fa-gamepad"></i></button>
+                    <button id="buttons-scoreboard-config-${i}" data-id="${game.id}" class=" btn btn-sm btn-info" title="Configurações"><i class="fa-solid fa-gear"></i></button>
                 </td>
             </tr>
         `

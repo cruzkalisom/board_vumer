@@ -154,7 +154,7 @@ router.post('/create-game', uploads.any(), (req,res) =>{
                     req.body.gameType,
                     req.body.gameDescription,
                     gamePrivate,
-                    result[0].org_id,
+                    req.body.gameOrg,
                     req.body.gameTime, 
                     req.body.minutes
 
