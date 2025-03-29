@@ -1,6 +1,6 @@
 var urlcontrolscoreboard = '/scoreboard/control'
 var timer = 90 * 60; // 90 minutes in seconds
-var isRunning = true
+var isRunning = false
 var timerId = null
 
 const socket = io()
@@ -16,6 +16,23 @@ $.ajax ({
         console.error(err)
     }
       
+})
+
+$('#start-pause').on('click', ()=> {
+    var startPause = document.getElementById('start-pause')
+
+    if(isRunning){
+        startPause.innerHTML = '<i class="fa-solid fa-play"></i>'
+        isRunning = false
+        clearInterval(timerId)
+    } else{
+        isRunning = true
+        startTimer()
+        startPause.innerHTML = '<i class="fa-solid fa-pause"></i>'
+        
+    }
+
+    
 })
 
 function startTimer(){
@@ -35,19 +52,17 @@ function formatTime(timer){
     if (timer < 60){
         return `00:${String(timer).padStart(2, '0')}`
     }
-
-    const hours = Math.floor(timer / 3600)
     
-    const minutes = Math.floor((timer % 3600) / 60)
+    const minutes = Math.floor(timer / 60)
 
     const seconds = timer % 60
 
-    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
 }
 
     
 
-startTimer() // iniciar o timer
+ // iniciar o timer
 
 /* let scores = {
     team1: 0,
