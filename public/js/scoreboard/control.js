@@ -18,6 +18,22 @@ $.ajax ({
       
 })
 
+$('#point-more-1').on('click', ()=>{
+    socket.emit ('point-more-1')
+})
+
+$('#point-more-2').on('click', ()=>{
+    socket.emit ('point-more-2')
+})
+
+$('#point-less-1').on('click', ()=>{
+    socket.emit ('point-less-1')
+})
+
+$('#point-less-2').on('click', ()=>{
+    socket.emit ('point-less-2')
+})
+
 $('#start-pause').on('click', ()=> {
     var startPause = document.getElementById('start-pause')
 

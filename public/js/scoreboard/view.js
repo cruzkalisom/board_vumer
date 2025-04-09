@@ -16,24 +16,36 @@ $.ajax ({
 })
 
 socket.on('updatetimer',(data) => {       // .on ouvir eventos
-    console.log(data)
     document.getElementById ('timer').innerText = formatTime(data)
+})
+
+socket.on('point-more-1',(data)=>{
+    console.log('mais um ponto para o time 1')
+})
+
+socket.on('point-more-2',(data)=>{
+    console.log('mais um ponto para o time 2')
+})
+
+socket.on('point-less-1',(data)=>{
+    console.log('menos um ponto para o time 1')
+})
+
+socket.on('point-less-2',(data)=>{
+    console.log('menos um ponto para o time 2')
 })
 
 function formatTime(timer){ 
     if (timer < 60){
         return `00:${String(timer).padStart(2, '0')}`
     }
-
-    const hours = Math.floor(timer / 3600)
     
-    const minutes = Math.floor((timer % 3600) / 60)
+    const minutes = Math.floor(timer / 60)
 
     const seconds = timer % 60
 
-    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
 }
-
 
 /* let scores = {
     team1: 0,
