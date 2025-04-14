@@ -6,7 +6,9 @@ $.ajax ({
     url : urlviewscoreboard,
     type : 'post',
     success : (data) =>{
-        
+        if(data.gameInvalid){
+            alert ('Jogo não existe')
+        }
     },
     error : (err)=>{
         console.err('erro ao solicitar resposta na rota ' +url)
