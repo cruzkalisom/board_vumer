@@ -97,8 +97,11 @@ body {
     color: #666;
 }
 
+.controls button{
+    margin: 0.5rem;
+}
+
 .controls {
-    display: flex;
     gap: 0.5rem;
     justify-content: center;
 }
