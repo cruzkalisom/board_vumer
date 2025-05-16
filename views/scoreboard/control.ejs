@@ -16,16 +16,19 @@
         <div class="timer-container">
             <div class="row">
                 <div class="col">
-                    <div style="display: flex; justify-content: left; font-size: 30px;">24</div>
+                    <div style=" justify-content: left; font-size: 30px;"><strong>24</strong></div>
+                    <button style="justify-content: left;" class="btn btn-dark" id="start24"><i class="fa-solid fa-play"></i></button>    
                 </div>
                 <div class="col">
-                    <button  style="display: flex; justify-content: left; background-color: rgb(0, 0, 0);" class="start" id="start24"><i class="fa-solid fa-play"></i></button>
+                    <div style="display: flex; justify-content: center;" class="timer" id="timer">12:00</div>
+                    <div class="timer-controls">
+                        <button class="btn btn-success" id="start-pause" ><i class="fa-solid fa-play"></i></button>
+                        <button class="btn btn-secondary" >Reiniciar</button>
+                    </div>
                 </div>
-            </div>
-            <div style="display: flex; justify-content: center;" class="timer" id="timer">12:00</div>
-            <div class="timer-controls">
-                <button class="start" id="start-pause" ><i class="fa-solid fa-play"></i></button>
-                <button class="reset" >Reset</button>
+                <div class="col">
+                    <div class="div" style="font-size: 30px;"><strong>1º</strong></div>
+                </div>
             </div>
         </div>
         <div class="match-container">
@@ -33,6 +36,7 @@
                 <div class="team-logo">
                     <div style="font-size: 2rem;">🏆</div>
                 </div>
+                <div><img src="../../images/general/red-flag.png" alt="" width="35px" height="35px"></div>
                 <div class="team-name">Team 1</div>
                 <div class="score" id="score1">0</div>
                 <div class="controls">
@@ -65,6 +69,7 @@
                 <div class="team-logo">
                     <div style="font-size: 2rem;">🏆</div>
                 </div>
+                <div><img src="../../images/general/red-flag.png" alt="" width="35px" height="35px"></div>
                 <div class="team-name">Team 2</div>
                 <div class="score" id="score2">0</div>
                 <div class="controls">
